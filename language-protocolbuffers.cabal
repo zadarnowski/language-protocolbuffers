@@ -1,6 +1,6 @@
 name:           language-protocolbuffers
 version:        0.1.0.0
-synopsis:       Protocol buffer descriptor source manipulation
+synopsis:       Protocol buffers descriptor library
 homepage:       http://github.com/zadarnowski/language-protocolbuffers
 category:       Language
 stability:      alpha
