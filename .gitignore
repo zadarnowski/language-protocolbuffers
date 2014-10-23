@@ -1,0 +1,11 @@
+.DS_Store
+*.o
+*.hi
+
+.cabal-sandbox/
+cabal.sandbox.config
+dist
+
+Language/ProtocolBuffers/Scanner.hs
+Language/ProtocolBuffers/Parser.hs
+Language/ProtocolBuffers/Parser.info

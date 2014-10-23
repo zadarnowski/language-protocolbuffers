@@ -1,0 +1,40 @@
+name:           language-protocolbuffers
+version:        0.1.0.0
+synopsis:       Protocol buffer descriptor source manipulation
+homepage:       http://github.com/zadarnowski/language-protocolbuffers
+category:       Language
+stability:      alpha
+
+author:         Patryk Zadarnowski
+maintainer:     Patryk Zadarnowski <pat@jantar.org>
+
+copyright:
+  Copyright (c) 2014 Patryk Zadarnowski
+
+description:
+  Parser and data types for manipulation of protocol buffer descriptors.
+
+cabal-version:  >= 1.18
+build-type:     Simple
+license:        BSD3
+license-file:   LICENSE
+
+library
+  hs-source-dirs:   src
+  default-language: Haskell2010
+  ghc-options:      -Wall
+  build-tools:      happy, alex
+
+  exposed-modules:
+    Language.ProtocolBuffers.Contexts
+    Language.ProtocolBuffers.Descriptors
+    Language.ProtocolBuffers.Model
+    Language.ProtocolBuffers.Parser
+    Language.ProtocolBuffers.Positions
+    Language.ProtocolBuffers.Scanner
+    Language.ProtocolBuffers.Syntax
+    Language.ProtocolBuffers.Tokens
+    Language.ProtocolBuffers.Utilities
+
+  build-depends:
+    base >= 4.7 && < 5
