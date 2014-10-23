@@ -1,5 +1,5 @@
-Protocol Buffers Descriptor Parser - Parse Tree
-===============================================
+Protocol Buffers Descriptor Library - Parse Tree
+================================================
 
     Copyright © 2014 Patryk Zadarnowski «pat@jantar.org».
     All rights reserved.
@@ -12,7 +12,6 @@ code generation stages of translation.
 > module Language.ProtocolBuffers.Syntax where
 
 > import Data.ByteString (ByteString)
-> import Data.Maybe
 > import Language.ProtocolBuffers.Contexts
 > import Language.ProtocolBuffers.Tokens
 > import Language.ProtocolBuffers.Utilities

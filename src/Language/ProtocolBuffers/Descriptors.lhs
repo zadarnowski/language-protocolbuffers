@@ -1,5 +1,5 @@
-Protocol Buffers Descriptor Parser - Descriptors
-================================================
+Protocol Buffers Descriptor Library - Descriptor Types
+======================================================
 
     Copyright © 2014 Patryk Zadarnowski «pat@jantar.org».
     All rights reserved.
@@ -17,6 +17,7 @@ buffer compiler source code, used for bootstrapping of the protocol buffer compi
 >   fileDescriptorSetFile                   :: [FileDescriptorProto]
 > } deriving (Eq, Ord, Show)
 
+> defaultFileDescriptorSet :: FileDescriptorSet
 > defaultFileDescriptorSet = FileDescriptorSet {
 >   fileDescriptorSetFile                   = []
 > }
@@ -35,6 +36,7 @@ buffer compiler source code, used for bootstrapping of the protocol buffer compi
 >   fileDescriptorProtoSourceCodeInfo       :: Maybe SourceCodeInfo
 > } deriving (Eq, Ord, Show)
 
+> defaultFileDescriptorProto :: FileDescriptorProto
 > defaultFileDescriptorProto = FileDescriptorProto {
 >   fileDescriptorProtoName                 = Nothing,
 >   fileDescriptorProtoPackage              = Nothing,
@@ -60,6 +62,7 @@ buffer compiler source code, used for bootstrapping of the protocol buffer compi
 >   descriptorProtoOptions                  :: Maybe MessageOptions
 > } deriving (Eq, Ord, Show)
 
+> defaultDescriptorProto :: DescriptorProto
 > defaultDescriptorProto = DescriptorProto {
 >   descriptorProtoName                     = Nothing,
 >   descriptorProtoFields                   = [],
@@ -76,6 +79,7 @@ buffer compiler source code, used for bootstrapping of the protocol buffer compi
 >   descriptorProtoExtensionRangeEnd        :: Maybe Int32
 > } deriving (Eq, Ord, Show)
 
+> defaultDescriptorProtoExtensionRange :: DescriptorProtoExtensionRange
 > defaultDescriptorProtoExtensionRange = DescriptorProtoExtensionRange {
 >   descriptorProtoExtensionRangeStart      = Nothing,
 >   descriptorProtoExtensionRangeEnd        = Nothing
@@ -93,6 +97,7 @@ buffer compiler source code, used for bootstrapping of the protocol buffer compi
 >   fieldDescriptorProtoOptions             :: Maybe FieldOptions
 > } deriving (Eq, Ord, Show)
 
+> defaultFieldDescriptorProto :: FieldDescriptorProto
 > defaultFieldDescriptorProto = FieldDescriptorProto {
 >   fieldDescriptorProtoName                = Nothing,
 >   fieldDescriptorProtoNumber              = Nothing,
@@ -126,6 +131,7 @@ buffer compiler source code, used for bootstrapping of the protocol buffer compi
 >   TYPE_SINT64
 >   deriving (Enum, Eq, Ord, Show)
 
+> defaultFieldDescriptorProtoType :: FieldDescriptorProtoType
 > defaultFieldDescriptorProtoType = TYPE_DOUBLE
 
 > data FieldDescriptorProtoLabel =
@@ -134,12 +140,14 @@ buffer compiler source code, used for bootstrapping of the protocol buffer compi
 >   LABEL_REPEATED
 >   deriving (Enum, Eq, Ord, Show)
 
+> defaultFieldDescriptorProtoLabel :: FieldDescriptorProtoLabel
 > defaultFieldDescriptorProtoLabel = LABEL_OPTIONAL
 
 > data OneofDescriptorProto = OneofDescriptorProto {
 >   oneofDescriptorProtoName                :: Maybe String
 > } deriving (Eq, Ord, Show)
 
+> defaultOneofDescriptorProto :: OneofDescriptorProto
 > defaultOneofDescriptorProto = OneofDescriptorProto {
 >   oneofDescriptorProtoName                = Nothing
 > }
@@ -150,6 +158,7 @@ buffer compiler source code, used for bootstrapping of the protocol buffer compi
 >   enumDescriptorProtoOptions              :: Maybe EnumOptions
 > } deriving (Eq, Ord, Show)
 
+> defaultEnumDescriptorProto :: EnumDescriptorProto
 > defaultEnumDescriptorProto = EnumDescriptorProto {
 >   enumDescriptorProtoName                 = Nothing,
 >   enumDescriptorProtoValues               = [],
@@ -162,6 +171,7 @@ buffer compiler source code, used for bootstrapping of the protocol buffer compi
 >   enumValueDescriptorProtoOptions         :: Maybe EnumValueOptions
 > } deriving (Eq, Ord, Show)
 
+> defaultEnumValueDescriptorProto :: EnumValueDescriptorProto
 > defaultEnumValueDescriptorProto = EnumValueDescriptorProto {
 >   enumValueDescriptorProtoName            = Nothing,
 >   enumValueDescriptorProtoNumber          = Nothing,
@@ -174,6 +184,7 @@ buffer compiler source code, used for bootstrapping of the protocol buffer compi
 >   serviceDescriptorProtoOptions           :: Maybe ServiceOptions
 > } deriving (Eq, Ord, Show)
 
+> defaultServiceDescriptorProto :: ServiceDescriptorProto
 > defaultServiceDescriptorProto = ServiceDescriptorProto {
 >   serviceDescriptorProtoName              = Nothing,
 >   serviceDescriptorProtoMethods           = [],
@@ -187,6 +198,7 @@ buffer compiler source code, used for bootstrapping of the protocol buffer compi
 >   methodDescriptorProtoOptions            :: Maybe MethodOptions
 > } deriving (Eq, Ord, Show)
 
+> defaultMethodDescriptorProto :: MethodDescriptorProto
 > defaultMethodDescriptorProto = MethodDescriptorProto {
 >   methodDescriptorProtoName               = Nothing,
 >   methodDescriptorProtoInputType          = Nothing,
@@ -209,6 +221,7 @@ buffer compiler source code, used for bootstrapping of the protocol buffer compi
 >   fileOptionsUninterpretedOptions         :: [UninterpretedOption]
 > } deriving (Eq, Ord, Show)
 
+> defaultFileOptions :: FileOptions
 > defaultFileOptions = FileOptions {
 >   fileOptionsJavaPackage                  = Nothing,
 >   fileOptionsJavaOuterClassname           = Nothing,
@@ -230,6 +243,7 @@ buffer compiler source code, used for bootstrapping of the protocol buffer compi
 >   LITE_RUNTIME
 >   deriving (Enum, Eq, Ord, Show)
 
+> defaultFileOptionsOptimizeMode :: FileOptionsOptimizeMode
 > defaultFileOptionsOptimizeMode = SPEED
 
 > data MessageOptions = MessageOptions {
@@ -239,6 +253,7 @@ buffer compiler source code, used for bootstrapping of the protocol buffer compi
 >   messageOptionsUninterpretedOptions      :: [UninterpretedOption]
 > } deriving (Eq, Ord, Show)
 
+> defaultMessageOptions :: MessageOptions
 > defaultMessageOptions = MessageOptions {
 >   messageOptionsMessageSetWireFormat      = False,
 >   messageOptionsNoStandardDescriptorAccess = False,
@@ -256,6 +271,7 @@ buffer compiler source code, used for bootstrapping of the protocol buffer compi
 >   fieldOptionsUninterpretedOptions        :: [UninterpretedOption]
 > } deriving (Eq, Ord, Show)
 
+> defaultFieldOptions :: FieldOptions
 > defaultFieldOptions = FieldOptions {
 >   fieldOptionsCtype                       = STRING,
 >   fieldOptionsPacked                      = False,
@@ -272,6 +288,7 @@ buffer compiler source code, used for bootstrapping of the protocol buffer compi
 >   STRING_PIECE
 >   deriving (Enum, Eq, Ord, Show)
 
+> defaultFieldOptionsCType :: FieldOptionsCType
 > defaultFieldOptionsCType = STRING
 
 > data EnumOptions = EnumOptions {
@@ -280,6 +297,7 @@ buffer compiler source code, used for bootstrapping of the protocol buffer compi
 >   enumOptionsUninterpretedOptions         :: [UninterpretedOption]
 > } deriving (Eq, Ord, Show)
 
+> defaultEnumOptions :: EnumOptions
 > defaultEnumOptions = EnumOptions {
 >   enumOptionsAllowAlias                   = False,
 >   enumOptionsDeprecated                   = False,
@@ -291,6 +309,7 @@ buffer compiler source code, used for bootstrapping of the protocol buffer compi
 >   enumValueOptionsUninterpretedOptions    :: [UninterpretedOption]
 > } deriving (Eq, Ord, Show)
 
+> defaultEnumValueOptions :: EnumValueOptions
 > defaultEnumValueOptions = EnumValueOptions {
 >   enumValueOptionsDeprecated              = False,
 >   enumValueOptionsUninterpretedOptions    = []
@@ -301,6 +320,7 @@ buffer compiler source code, used for bootstrapping of the protocol buffer compi
 >   serviceOptionsUninterpretedOptions      :: [UninterpretedOption]
 > } deriving (Eq, Ord, Show)
 
+> defaultServiceOptions :: ServiceOptions
 > defaultServiceOptions = ServiceOptions {
 >   serviceOptionsDeprecated                = False,
 >   serviceOptionsUninterpretedOptions      = []
@@ -311,6 +331,7 @@ buffer compiler source code, used for bootstrapping of the protocol buffer compi
 >   methodOptionsUninterpretedOptions       :: [UninterpretedOption]
 > } deriving (Eq, Ord, Show)
 
+> defaultMethodOptions :: MethodOptions
 > defaultMethodOptions = MethodOptions {
 >   methodOptionsDeprecated                 = False,
 >   methodOptionsUninterpretedOptions       = []
@@ -326,7 +347,7 @@ buffer compiler source code, used for bootstrapping of the protocol buffer compi
 >   uninterpretedOptionAggregateValue       :: Maybe String
 > } deriving (Eq, Ord, Show)
 
-
+> defaultUninterpretedOption :: UninterpretedOption
 > defaultUninterpretedOption = UninterpretedOption {
 >   uninterpretedOptionNames                = [],
 >   uninterpretedOptionIdentifierValue      = Nothing,
@@ -342,6 +363,7 @@ buffer compiler source code, used for bootstrapping of the protocol buffer compi
 >   uninterpretedOptionNamePartIsExtension  :: Bool
 > } deriving (Eq, Ord, Show)
 
+> defaultUninterpretedOptionNamePart :: UninterpretedOptionNamePart
 > defaultUninterpretedOptionNamePart = UninterpretedOptionNamePart {
 >   uninterpretedOptionNamePartName         = undefined,
 >   uninterpretedOptionNamePartIsExtension  = False
@@ -351,6 +373,7 @@ buffer compiler source code, used for bootstrapping of the protocol buffer compi
 >   sourceCodeInfoLocations                 :: [SourceCodeInfoLocation]
 > } deriving (Eq, Ord, Show)
 
+> defaultSourceCodeInfo :: SourceCodeInfo
 > defaultSourceCodeInfo = SourceCodeInfo {
 >   sourceCodeInfoLocations                 = []
 > }
@@ -362,6 +385,7 @@ buffer compiler source code, used for bootstrapping of the protocol buffer compi
 >   sourceCodeInfoLocationTrailingComments  :: Maybe ByteString
 > } deriving (Eq, Ord, Show)
 
+> defaultSourceCodeInfoLocation :: SourceCodeInfoLocation
 > defaultSourceCodeInfoLocation = SourceCodeInfoLocation {
 >   sourceCodeInfoLocationPath              = [],
 >   sourceCodeInfoLocationSpan              = [],

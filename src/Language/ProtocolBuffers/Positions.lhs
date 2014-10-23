@@ -1,5 +1,5 @@
-Protocol Buffers Descriptor Parser - Source Code Positions
-==========================================================
+Protocol Buffers Descriptor Library - Source Code Positions
+===========================================================
 
     Copyright © 2014 Patryk Zadarnowski «pat@jantar.org».
     All rights reserved.
@@ -22,7 +22,6 @@ types for all line and column numbers in alignment with protocol buffers.
 > ) where
 
 > import Data.Functor
-> import Data.Int
 > import Language.ProtocolBuffers.Utilities
 
 > infixl 8 :@
@@ -53,7 +52,7 @@ types for all line and column numbers in alignment with protocol buffers.
 >   pmap f (x :@ p) = x :@ f p
 
 > instance HasValue Positioned where
->   value (v :@ p) = v
+>   value (v :@ _) = v
 
 > instance Functor Positioned where
 >   fmap f (x :@ p) = f x :@ p
@@ -63,16 +62,16 @@ types for all line and column numbers in alignment with protocol buffers.
 > noPosition = POS (LPOS "" 0) 0
 
 > lineNumber :: Position -> Index
-> lineNumber (POS (LPOS _ ln) cn) = ln
+> lineNumber (POS (LPOS _ ln) _) = ln
 
 > columnNumber :: Position -> Index
-> columnNumber (POS (LPOS _ ln) cn) = cn
+> columnNumber (POS _ cn) = cn
 
 > startPositionInFile :: FilePath -> Position
 > startPositionInFile fp = POS (LPOS fp 1) 1
 
 > advanceLine :: Index -> Position -> Position
-> advanceLine n (POS (LPOS fp ln) cn) = POS (LPOS fp (ln + n)) 1
+> advanceLine n (POS (LPOS fp ln) _) = POS (LPOS fp (ln + n)) 1
 
 > advanceColumn :: Index -> Position -> Position
 > advanceColumn n (POS lp cn) = POS lp (cn + n)

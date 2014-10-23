@@ -1,5 +1,5 @@
-Protocol Buffers Descriptor Parser - Annotations
-================================================
+Protocol Buffers Descriptor Library - Annotations
+=================================================
 
     Copyright © 2014 Patryk Zadarnowski «pat@jantar.org».
     All rights reserved.

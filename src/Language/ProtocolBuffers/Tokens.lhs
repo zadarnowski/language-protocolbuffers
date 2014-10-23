@@ -1,5 +1,5 @@
-Protocol Buffers Descriptor Parser - Lexical Tokens
-===================================================
+Protocol Buffers Descriptor Library - Lexical Tokens
+====================================================
 
     Copyright © 2014 Patryk Zadarnowski «pat@jantar.org».
     All rights reserved.
@@ -27,7 +27,6 @@ and "END_OF_TOKENS" is annotated with position information.
 > import Data.List
 > import Data.String
 > import Data.Word
-> import Numeric
 > import Language.ProtocolBuffers.Contexts
 > import Language.ProtocolBuffers.Positions
 > import Language.ProtocolBuffers.Utilities
@@ -92,11 +91,26 @@ marker, used to represent the output of lexical analyser:
 
 Partial functions extracting token attributes:
 
+> nameTokenValue :: Token -> Name
 > nameTokenValue (IDENTIFIER_TOKEN x) = x
+> nameTokenValue _ = error "nameTokenValue.undefined"
+
+> integerTokenValue :: Token -> Integer
 > integerTokenValue (INTEGER_TOKEN x) = x
-> rationalTokenMantissa (RATIONAL_TOKEN x e) = x
-> rationalTokenExponent (RATIONAL_TOKEN x e) = e
+> integerTokenValue _ = error "integerTokenValue.undefined"
+
+> rationalTokenMantissa :: Token -> Integer
+> rationalTokenMantissa (RATIONAL_TOKEN x _) = x
+> rationalTokenMantissa _ = error "rationalTokenMantissa.undefined"
+
+> rationalTokenExponent :: Token -> Integer
+> rationalTokenExponent (RATIONAL_TOKEN _ e) = e
+> rationalTokenExponent _ = error "rationalTokenExponent.undefined"
+
+> stringTokenValue :: Token -> ByteString
 > stringTokenValue (STRING_TOKEN x) = x
+> stringTokenValue _ = error "stringTokenValue.undefined"
+
 
 Extracts the canonical lexeme of every token; this isn't necessarily
 identical to what appeared in the source file, but is semantically
@@ -185,11 +199,11 @@ Quote and escape string literals:
 >     | (b > 0o7) = quoteOctit (b `shiftR` 3) : quoteOctit (b .&. 0o7) : quoteBytes bs
 >     | otherwise = quoteOctit b : quoteBytes bs
 >
->   startsWithOctit (b:bs) = quoteChar '0' <= b && b <= quoteChar '7'
+>   startsWithOctit (b:_) = quoteChar '0' <= b && b <= quoteChar '7'
 >   startsWithOctit [] = False
 >
 >   quoteOctit :: Word8 -> Word8
->   quoteOctit x = x + quoteChar '0'
+>   quoteOctit b = b + quoteChar '0'
 >
 >   quoteChar :: Char -> Word8
 >   quoteChar = fromIntegral . ord

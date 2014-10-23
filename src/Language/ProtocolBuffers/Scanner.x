@@ -2,8 +2,8 @@
 
 {-
 
-Protocol Buffers Descriptor Parser - Lexical Analyser
-=====================================================
+Protocol Buffers Descriptor Library - Lexical Analyser
+======================================================
 
     Copyright © 2014 Patryk Zadarnowski «pat@jantar.org».
     All rights reserved.
@@ -15,10 +15,11 @@ defined in "Contexts".
 
 -}
 
+{-# OPTIONS_GHC -fno-warn-unused-binds -fno-warn-unused-matches -fno-warn-missing-signatures #-}
+
 module Language.ProtocolBuffers.Scanner (Tokens, scanTokens) where
 
 import Data.ByteString (ByteString)
-import Data.Char
 import Data.Functor
 import Data.Maybe
 import Data.Word
@@ -146,7 +147,7 @@ scanTokens :: Positioned ByteString -> Tokens
 scanTokens inp =
   case alexScan inp 0 of
     AlexToken inp' len act -> act undefined 0 inp len inp'
-    AlexSkip inp' len      -> scanTokens inp'
+    AlexSkip inp' _        -> scanTokens inp'
     AlexError inp'         -> fmap unexpected inp ::! scanTokens inp'
     AlexEOF                -> END_OF_TOKENS $ position inp
 
@@ -185,14 +186,14 @@ readRational s = readIntegerPart 0 s
   readExponentPart m e ('-':xs) = readExponentValue m e (-1) 0 xs
   readExponentPart m e ('+':xs) = readExponentValue m e  (1) 0 xs
   readExponentPart m e     (xs) = readExponentValue m e  (1) 0 xs
-  readExponentValue m e s e' (c:xs)
-    | ('0' <= c && c <= '9') = readExponentValue m e s (e' * 10 + digitValue c) xs
-  readExponentValue m e s e' xs = [(normalisedScientific m (e + s * e'), xs)]
+  readExponentValue m e g e' (c:xs)
+    | ('0' <= c && c <= '9') = readExponentValue m e g (e' * 10 + digitValue c) xs
+  readExponentValue m e g e' xs = [(normalisedScientific m (e + g * e'), xs)]
   digitValue c = fromIntegral (ord c - ord '0')
 
 -- Symbols are trivial, since they have no features other than their position position:
 produceSymbol :: Token -> s -> Int -> Positioned ByteString -> Int -> Positioned ByteString -> Tokens
-produceSymbol t _ _ inp len inp' = t :@@ between inp inp' ::> scanTokens inp'
+produceSymbol t _ _ inp _ inp' = t :@@ between inp inp' ::> scanTokens inp'
 
 -- String literals are a little bit tricky, since, in the interest of sensible error messages,
 -- the scanner needs to process escape sequences into the string's ultimate form.
@@ -202,25 +203,25 @@ produceSymbol t _ _ inp len inp' = t :@@ between inp inp' ::> scanTokens inp'
 -- want to presume any specific encoding on the user's part.
 
 beginString :: Int -> s -> Int -> Positioned ByteString -> Int -> Positioned ByteString -> Tokens
-beginString sc _ _ inp len inp' = scanString ([] <$ inp) sc inp'
+beginString sc _ _ inp _ inp' = scanString ([] <$ inp) sc inp'
 
 scanString :: Positioned [ByteString] -> Int -> Positioned ByteString -> Tokens
 scanString rs sc inp =
   case alexScan inp sc of
     AlexToken inp' len act -> act rs sc inp len inp'
-    AlexSkip inp' len      -> scanString rs sc inp'
+    AlexSkip inp' _        -> scanString rs sc inp'
     AlexError inp'         -> fmap unexpected inp ::! scanString rs sc inp'
     AlexEOF                -> reportIncompleteStringLiteral rs sc inp 0 inp
 
 endString :: Positioned [ByteString] -> Int -> Positioned ByteString -> Int -> Positioned ByteString -> Tokens
-endString rs sc inp len inp' = (STRING_TOKEN $ ByteString.concat $ reverse $ value rs) :@@ between rs inp' ::> scanTokens inp'
+endString rs _ _ _ inp' = (STRING_TOKEN $ ByteString.concat $ reverse $ value rs) :@@ between rs inp' ::> scanTokens inp'
 
 produceStringPart :: Positioned [ByteString] -> Int -> Positioned ByteString -> Int -> Positioned ByteString -> Tokens
 produceStringPart rs sc inp len inp' = scanString (fmap (r :) rs) sc inp'
   where r = ByteString.take len (value inp)
 
 produceSimpleEscape :: Char -> Positioned [ByteString] -> Int -> Positioned ByteString -> Int -> Positioned ByteString -> Tokens
-produceSimpleEscape c rs sc inp len inp' = scanString (fmap (r :) rs) sc inp'
+produceSimpleEscape c rs sc _ _ inp' = scanString (fmap (r :) rs) sc inp'
   where r = ByteString.singleton $ fromIntegral $ ord c
 
 produceOctalEscape :: Positioned [ByteString] -> Int -> Positioned ByteString -> Int -> Positioned ByteString -> Tokens
@@ -248,9 +249,9 @@ produceUnicodeEscape rs sc inp len inp'
   r = ByteString.singleton $ fromIntegral x
 
 reportIllegalEscape :: Positioned [ByteString] -> Int -> Positioned ByteString -> Int -> Positioned ByteString -> Tokens
-reportIllegalEscape rs sc inp len inp' = ("Illegal escape sequence" <$ inp) ::! scanString rs sc inp'
+reportIllegalEscape rs sc inp _ inp' = ("Illegal escape sequence" <$ inp) ::! scanString rs sc inp'
 
 reportIncompleteStringLiteral :: Positioned [ByteString] -> Int -> Positioned ByteString -> Int -> Positioned ByteString -> Tokens
-reportIncompleteStringLiteral rs sc inp len inp' = ("Incomplete string literal" <$ inp) ::! scanTokens inp'
+reportIncompleteStringLiteral _ _ inp _ inp' = ("Incomplete string literal" <$ inp) ::! scanTokens inp'
 
 }

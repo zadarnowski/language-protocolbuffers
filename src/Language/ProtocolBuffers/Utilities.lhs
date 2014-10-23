@@ -1,5 +1,5 @@
-Protocol Buffers Descriptor Parser - Utilities
-==============================================
+Protocol Buffers Descriptor Library - Utilities
+===============================================
 
     Copyright © 2014 Patryk Zadarnowski «pat@jantar.org».
     All rights reserved.
@@ -21,11 +21,9 @@ Common utilities that don't belong anywhere else.
 > ) where
 
 > import Data.ByteString (ByteString)
-> import Data.Char
 > import Data.Int
 > import Data.Maybe
 
-> import qualified Data.ByteString as ByteString
 > import qualified Data.ByteString.UTF8 as UTF8
 
   For convenience, we define the class of "wrapped values", which provide a "value" method with
@@ -67,7 +65,7 @@ Common utilities that don't belong anywhere else.
 > fromPList xs = fromPList' xs []
 >  where
 >   fromPList' (LIST x) rs = (x, rs)
->   fromPList' (xs ::: x) rs = fromPList' xs (x:rs)
+>   fromPList' (xxs ::: x) rs = fromPList' xxs (x:rs)
 
 > fromQList :: QList a -> [a]
 > fromQList = uncurry (:) . fromPList

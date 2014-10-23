@@ -1,5 +1,5 @@
-Protocol Buffers Descriptor Parser - Contexts
-=============================================
+Protocol Buffers Descriptor Library - Contexts
+==============================================
 
     Copyright © 2014 Patryk Zadarnowski «pat@jantar.org».
     All rights reserved.
@@ -17,10 +17,7 @@ of the start position, and other such nonsense.)
 > ) where
 
 > import Control.Applicative
-> import Control.Monad
 > import Data.ByteString (ByteString)
-> import Data.Functor
-> import Data.Int
 > import Language.ProtocolBuffers.Positions
 > import Language.ProtocolBuffers.Utilities
 

@@ -2,8 +2,8 @@
 
 {-
 
-Protocol Buffers Descriptor Parser - Parser
-===========================================
+Protocol Buffers Descriptor Library - Parser
+============================================
 
     Copyright © 2014 Patryk Zadarnowski «pat@jantar.org».
     All rights reserved.

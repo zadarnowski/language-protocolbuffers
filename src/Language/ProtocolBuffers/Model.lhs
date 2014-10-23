@@ -1,5 +1,5 @@
-Protocol Buffers Descriptor Parser - Descriptor Model
-=====================================================
+Protocol Buffers Descriptor Library - Abstract Model
+====================================================
 
     Copyright © 2014 Patryk Zadarnowski «pat@jantar.org».
     All rights reserved.
@@ -7,6 +7,10 @@ Protocol Buffers Descriptor Parser - Descriptor Model
 Data types which describe semantically-meaningful structure of .proto files.
 
 > module Language.ProtocolBuffers.Model (
+>   FileDescriptor (..),
+>   ImportDescriptor (..),
+>   TypeDescriptor (..),
+>   ServiceDescriptor (..),
 > ) where
 
 > import Data.Map (Map)
