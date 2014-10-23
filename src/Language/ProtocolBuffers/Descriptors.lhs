@@ -7,7 +7,7 @@ Protocol Buffers Descriptor Parser - Descriptors
 These are protocol buffer descriptor types as definied in the Google's protocol
 buffer compiler source code, used for bootstrapping of the protocol buffer compiler.
 
-> module Language.ProtocolBuffers.Syntax where
+> module Language.ProtocolBuffers.Descriptors where
 
 > import Data.ByteString (ByteString)
 > import Data.Int

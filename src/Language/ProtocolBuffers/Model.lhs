@@ -9,6 +9,7 @@ Data types which describe semantically-meaningful structure of .proto files.
 > module Language.ProtocolBuffers.Model (
 > ) where
 
+> import Data.Map (Map)
 > import Language.ProtocolBuffers.Utilities
 
 > data FileDescriptor = FILE_DESCRIPTOR {

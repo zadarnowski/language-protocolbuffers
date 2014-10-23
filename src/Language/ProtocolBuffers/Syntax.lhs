@@ -9,13 +9,13 @@ and used to isolate subsequent validation and code generation
 stages from primitive parsing concerns.
 code generation stages of translation.
 
-> module ProtocolBuffers.Syntax where
+> module Language.ProtocolBuffers.Syntax where
 
 > import Data.ByteString (ByteString)
 > import Data.Maybe
-> import ProtocolBuffers.Contexts
-> import ProtocolBuffers.Tokens
-> import ProtocolBuffers.Utilities
+> import Language.ProtocolBuffers.Contexts
+> import Language.ProtocolBuffers.Tokens
+> import Language.ProtocolBuffers.Utilities
 
 > data TopLevelStatement =
 >   TOP_LEVEL_NULL_STATEMENT

@@ -37,4 +37,8 @@ library
     Language.ProtocolBuffers.Utilities
 
   build-depends:
-    base >= 4.7 && < 5
+    array           >= 0.5,
+    base            >= 4.7 && < 5,
+    bytestring      >= 0.10,
+    containers      >= 0.5.5.1,
+    utf8-string     >= 0.3

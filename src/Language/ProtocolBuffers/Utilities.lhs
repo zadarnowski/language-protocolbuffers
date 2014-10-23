@@ -11,7 +11,7 @@ and fix tab stops eight columns apart. However,we still use 32-bit signed intege
 types for all line and column numbers in alignment with protocol buffers.
 Common utilities that don't belong anywhere else.
 
-> module ProtocolBuffers.Utilities (
+> module Language.ProtocolBuffers.Utilities (
 >   HasValue (..),
 >   List, Index, IndexPath, Name,
 >   PList (..), fromPList,

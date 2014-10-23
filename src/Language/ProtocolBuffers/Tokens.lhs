@@ -10,7 +10,7 @@ error messages, and always ends in a special "END_OF_TOKENS" element.
 All tokens in a sequence are annotated with their source context,
 and "END_OF_TOKENS" is annotated with position information.
 
-> module ProtocolBuffers.Tokens (
+> module Language.ProtocolBuffers.Tokens (
 >   Token (..), Tokens (..),
 >   nameTokenValue,
 >   integerTokenValue,
@@ -28,9 +28,9 @@ and "END_OF_TOKENS" is annotated with position information.
 > import Data.String
 > import Data.Word
 > import Numeric
-> import ProtocolBuffers.Contexts
-> import ProtocolBuffers.Positions
-> import ProtocolBuffers.Utilities
+> import Language.ProtocolBuffers.Contexts
+> import Language.ProtocolBuffers.Positions
+> import Language.ProtocolBuffers.Utilities
 
 > import qualified Data.ByteString as ByteString
 

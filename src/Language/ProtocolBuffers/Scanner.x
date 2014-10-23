@@ -15,7 +15,7 @@ defined in "Contexts".
 
 -}
 
-module ProtocolBuffers.Scanner (Tokens, scanTokens) where
+module Language.ProtocolBuffers.Scanner (Tokens, scanTokens) where
 
 import Data.ByteString (ByteString)
 import Data.Char
@@ -23,10 +23,10 @@ import Data.Functor
 import Data.Maybe
 import Data.Word
 import Numeric
-import ProtocolBuffers.Contexts
-import ProtocolBuffers.Positions
-import ProtocolBuffers.Tokens
-import ProtocolBuffers.Utilities
+import Language.ProtocolBuffers.Contexts
+import Language.ProtocolBuffers.Positions
+import Language.ProtocolBuffers.Tokens
+import Language.ProtocolBuffers.Utilities
 
 import qualified Data.ByteString as ByteString
 import qualified Data.ByteString.UTF8 as UTF8
